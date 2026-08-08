@@ -1,15 +1,13 @@
-package com.amazon.Order.service;
+package com.amazon.payment_service.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.amazon.payment_service.Exception.ProductNotFoundException;
+import com.amazon.payment_service.dto.ProductRequest;
+import com.amazon.payment_service.dto.ProductResponse;
+import com.amazon.payment_service.entity.Product;
+import com.amazon.payment_service.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import com.amazon.Order.Exception.ProductNotFoundException;
-import com.amazon.Order.dto.ProductRequest;
-import com.amazon.Order.dto.ProductResponse;
-import com.amazon.Order.entity.Product;
-import com.amazon.Order.repository.ProductRepository;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -45,16 +43,19 @@ public class ProductService {
 	}
 
 	public List<Product> getActiveProducts() {
+		System.out.println(" service Fetching active products...");
+		System.out.println("productRepository count is"+productRepository.count());
 		return productRepository.findByActiveTrue();
 	}
 
 	public String deactivateProduct(Long ProductID) {
-		Product product = new Product();
+		//Product product = new Product();
+		Product product = productRepository.findById(ProductID).orElseThrow(() -> new ProductNotFoundException("product not found"));
 		product.setActive(false);
 
 		productRepository.save(product);
 
-		return "Product Deactivated";
+		return "Product-"+ ProductID+" Deactivated";
 	}
 
 	public List<Product> getProduct() {

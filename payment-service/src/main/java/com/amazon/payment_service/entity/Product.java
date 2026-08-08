@@ -1,12 +1,8 @@
-package com.amazon.Order.entity;
+package com.amazon.payment_service.entity;
+
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name="PRODUCT")

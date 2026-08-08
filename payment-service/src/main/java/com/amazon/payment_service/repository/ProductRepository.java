@@ -1,11 +1,9 @@
-package com.amazon.Order.repository;
+package com.amazon.payment_service.repository;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.amazon.payment_service.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.amazon.Order.entity.Product;
+import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

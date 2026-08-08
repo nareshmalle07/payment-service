@@ -1,19 +1,12 @@
-package com.amazon.Order.controller;
+package com.amazon.payment_service.controller;
+
+import com.amazon.payment_service.dto.ProductRequest;
+import com.amazon.payment_service.dto.ProductResponse;
+import com.amazon.payment_service.entity.Product;
+import com.amazon.payment_service.service.ProductService;//
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.amazon.Order.dto.ProductRequest;
-import com.amazon.Order.dto.ProductResponse;
-import com.amazon.Order.entity.Product;
-import com.amazon.Order.repository.ProductRepository;
-import com.amazon.Order.service.ProductService;
 
 @RestController
 @RequestMapping("/product")
@@ -24,13 +17,13 @@ public class ProductController {
 		this.productService=productService;
 	}
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<Product> getProduct()
 	{
 		return productService.getProduct();	
 	}  
 	
-	@PostMapping
+	@PostMapping("/insert")
 	public ProductResponse insertProduct(@RequestBody ProductRequest request) 
 	{
 		return productService.insertProduct(request);
@@ -45,7 +38,11 @@ public class ProductController {
 	@GetMapping("/active")
 	public List<Product> getActiveProducts()
 	{
-		return productService.getActiveProducts();
+		System.out.println("Fetching active products...");
+		List<Product> productResponse= productService.getActiveProducts();
+		System.out.println(" active products are ..."+productResponse);
+		return productResponse;
+
 	}
 	
 	@PostMapping("/deactivate/{ProductID}")

@@ -1,4 +1,4 @@
-package com.amazon.Order.dto;
+package com.amazon.payment_service.dto;
 
 import java.math.BigDecimal;
 
